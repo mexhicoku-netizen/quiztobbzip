@@ -3,7 +3,7 @@
 Free, browser-only quiz converter: drop in a Word (.docx), .txt or .md quiz and download a Blackboard-format test .zip
 that Schoology, Canvas, Moodle and Blackboard can import. No server, no uploads, no AI, no build step, no CDN.
 
-Author: Mexhisan Coku (MCO Teaching). The engine is a JavaScript port of `quiz2bb.py` v1.1.
+A JavaScript port of a Python quiz converter (quiz2bb.py v1.1).
 
 ## Files
 | File | What it is |

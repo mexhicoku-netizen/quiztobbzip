@@ -1,5 +1,5 @@
 /*  QuizToBBZip engine  -  runs entirely in the browser (and in Node for tests).
- *  A 1:1 port of quiz2bb.py v1.1 (Mexhisan Coku, MCO Teaching) to plain JavaScript.
+ *  A 1:1 port of quiz2bb.py v1.1 to plain JavaScript.
  *  No server, no uploads, no AI, no external libraries.
  */
 (function (root, factory) {
