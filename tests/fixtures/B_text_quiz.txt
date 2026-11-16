@@ -1,0 +1,17 @@
+Maths Homework Quiz
+
+1. What is 2 + 2? a) 3 b) 4 c) 5 d) 6
+2. Solve for x: \(x^2 = 9\). (3 pts)
+A. x = 3
+B. x = -3
+*C. x = 3 or x = -3
+D. no solution
+3. True or false: the sum of angles in a triangle is 180 degrees.
+Answer: True
+4. Which is prime?
+a) 4
+b) 6
+c) 7 (correct)
+d) 9
+Feedback: 7 has exactly two factors.
+5. Explain why the sky is blue.

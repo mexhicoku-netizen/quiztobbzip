@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuizToBBZip - turn a Word quiz into a Blackboard test .zip for Schoology, Canvas and Moodle</title>
+<meta name="description" content="Free quiz converter that runs in your browser. Drop in a Word, text or Markdown quiz and download a Blackboard test .zip for Schoology, Canvas, Moodle or Blackboard.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231f4fd8%27/%3E%3Cpath d=%27M9 17l5 5 9-12%27 stroke=%27white%27 stroke-width=%273.5%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="bar"><a class="logo" href="index.html">Quiz<span>To</span>BBZip</a><nav aria-label="Main"><a href="index.html" aria-current="page">Convert</a><a href="how-to.html">How to format a quiz</a><a href="import.html">Import steps</a><a href="privacy.html">Privacy</a><a href="about.html">About</a></nav></div></header>
+<div class="ad-slot ad-header" data-slot="header" hidden><span class="ad-label">Advertisement</span></div>
+<div class="wrap with-side">
+<main id="main" class="prose">
+
+<h1>Turn a quiz into a Blackboard test .zip</h1>
+<p class="lede">Drop in a Word, text or Markdown quiz and get a ready-to-import test for Schoology, Canvas, Moodle or Blackboard. No account, no upload, no AI: it all happens in this browser tab.</p>
+<ul class="badges"><li>Free</li><li>Files never leave your computer</li><li>Works offline once loaded</li></ul>
+
+<div id="error" class="msg err" role="alert" hidden></div>
+
+<section class="card" aria-labelledby="s1">
+  <h2 id="s1"><span class="step">1</span>Your quiz</h2>
+  <label class="drop" id="quizDrop">
+    <input type="file" id="quizInput" accept=".docx,.txt,.md,.text">
+    <strong>Drop your quiz here, or click to choose a file</strong>
+    <small>Word (.docx), .txt or .md &middot; Google Docs: File &rarr; Download &rarr; Word (.docx)</small>
+    <div class="filechip" id="quizChip" aria-live="polite"></div>
+  </label>
+  <p class="hint" style="margin:.7rem 0 0">Not sure how to lay it out? <a href="how-to.html">See the format guide</a> or <button type="button" class="secondary" id="trySample" style="padding:.25rem .7rem;font-weight:600">try an example</button></p>
+</section>
+
+<section class="card" aria-labelledby="s2">
+  <h2 id="s2"><span class="step">2</span>Answers <span class="hint">(optional if the quiz already marks them)</span></h2>
+  <div class="grid2">
+    <div>
+      <label for="keyText">Type the key</label>
+      <textarea id="keyText" rows="2" placeholder="B C A D ...    or    1B 2C 3A" spellcheck="false"></textarea>
+      <span class="hint">Used instead of a key file if both are given.</span>
+    </div>
+    <div>
+      <label for="keyInput">Or add a key / mark scheme file</label>
+      <label class="drop" id="keyDrop" style="padding:.8rem .6rem">
+        <input type="file" id="keyInput" accept=".docx,.txt,.md,.text">
+        <strong style="font-size:.95rem">Choose or drop a key file</strong>
+        <div class="filechip" id="keyChip" aria-live="polite"></div>
+      </label>
+      <button type="button" class="secondary" id="clearKey" hidden style="margin-top:.4rem;padding:.25rem .7rem;font-weight:600">Remove key file</button>
+    </div>
+  </div>
+</section>
+
+<section class="card" aria-labelledby="s3">
+  <h2 id="s3"><span class="step">3</span>Options</h2>
+  <label for="title">Quiz title <span class="hint">(leave empty to use the one found in the file)</span></label>
+  <input type="text" id="title" autocomplete="off">
+  <div class="checks">
+    <label><input type="checkbox" id="shuffle" checked> Shuffle answers evenly across A&ndash;D</label>
+    <label><input type="checkbox" id="keepLatex"> Keep LaTeX as typed</label>
+  </div>
+  <details class="more">
+    <summary>More options</summary>
+    <div class="grid2">
+      <div><label for="points">Points per multiple-choice question</label><input type="number" id="points" value="1" min="0.5" step="0.5"></div>
+      <div><label for="seed">Shuffle seed <span class="hint">(change it for a different order)</span></label><input type="number" id="seed" value="1" step="1"></div>
+    </div>
+    <div style="margin-top:.8rem"><label for="instructions">Instructions shown at the start of the quiz</label><textarea id="instructions" rows="2"></textarea></div>
+    <div class="checks"><label><input type="checkbox" id="packFigures" checked> Pack pictures inside the Blackboard .zip</label></div>
+  </details>
+</section>
+
+<section id="results" class="card" aria-labelledby="s4" aria-live="polite" hidden>
+  <h2 id="s4"><span class="step">4</span>What was found</h2>
+  <div class="summary" id="summary"></div>
+  <div id="warnings" class="msg warn" hidden></div>
+  <div id="missingBox" class="msg warn" hidden>
+    <strong><span id="missingCount">0</span> multiple-choice question(s) have no answer yet</strong> (red rows below). Add them in the key box above, or tick the box to build anyway (they become answer A and you fix them in your LMS).
+    <label style="font-weight:500;margin-top:.4rem;display:flex;gap:.5rem;align-items:center"><input type="checkbox" id="allowMissing"> Build anyway</label>
+  </div>
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col">Q</th><th scope="col">Question</th><th scope="col">Type</th><th scope="col">Answer</th><th scope="col">How found</th><th scope="col">Figure</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table></div>
+  <h3>Answer key in the order the test will have</h3>
+  <div class="keyline" id="keyline"></div>
+  <p class="hint" id="shuffleNote" hidden>Answers were shuffled, so these letters differ from your paper copy (shown as old &rarr; new in the table). Use this key, or the Key file in the download.</p>
+  <div class="actions">
+    <button type="button" id="dlAll" disabled>Download everything (.zip)</button>
+    <button type="button" class="secondary" id="dlBB" disabled>Blackboard .zip only</button>
+  </div>
+  <p class="hint">Everything contains the Blackboard test, the answer key, a plain-text version to paste, a check report and your figures. <a href="import.html">How to import it</a>.</p>
+  <div id="done" class="msg good" hidden role="status"></div>
+</section>
+
+</main>
+<aside class="side" hidden aria-label="Advertisement"><div class="ad-slot ad-sidebar" data-slot="sidebar" hidden><span class="ad-label">Advertisement</span></div></aside>
+</div>
+<div class="ad-slot ad-footer" data-slot="footer" hidden><span class="ad-label">Advertisement</span></div>
+<footer class="site-footer"><div class="inner"><span>QuizToBBZip &middot; free, runs in your browser</span><a href="how-to.html">How to format a quiz</a><a href="import.html">Import steps</a><a href="privacy.html">Privacy</a><a href="about.html">About</a><a href="#" data-cookie-settings hidden>Cookie settings</a></div></footer>
+<script src="config.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

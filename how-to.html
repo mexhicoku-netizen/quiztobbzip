@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to format a quiz for QuizToBBZip</title>
+<meta name="description" content="Layouts the converter understands: numbering, options, answer keys, true/false, written answers, pictures and equations.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231f4fd8%27/%3E%3Cpath d=%27M9 17l5 5 9-12%27 stroke=%27white%27 stroke-width=%273.5%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="bar"><a class="logo" href="index.html">Quiz<span>To</span>BBZip</a><nav aria-label="Main"><a href="index.html">Convert</a><a href="how-to.html" aria-current="page">How to format a quiz</a><a href="import.html">Import steps</a><a href="privacy.html">Privacy</a><a href="about.html">About</a></nav></div></header>
+<div class="ad-slot ad-header" data-slot="header" hidden><span class="ad-label">Advertisement</span></div>
+<div class="wrap with-side">
+<main id="main" class="prose">
+
+<h1>How to format a quiz</h1>
+<p class="lede">The converter reads quizzes the way teachers normally write them. You do not need special codes. These are the layouts it understands.</p>
+
+<h2>Questions and options</h2>
+<p>Start each question with a number: <code>1.</code> <code>1)</code> <code>Q1.</code> <code>Question 1:</code> or Word&rsquo;s own automatic numbering. Options start with a letter: <code>a)</code> <code>A.</code> <code>(b)</code> or Word&rsquo;s automatic lettering. Several options on one line are fine.</p>
+<pre><code>1. What is the SI unit of force?
+a) Joule
+b) Newton
+c) Watt
+d) Pascal
+
+2. Which is a vector? a) mass b) speed c) velocity d) time</code></pre>
+
+<h2>Where the answers come from</h2>
+<p>For each question the first of these that is found wins:</p>
+<ol>
+<li><strong>The key box or a key file</strong> on the converter page: <code>B C A D</code>, <code>1B 2C 3A</code>, or a mark-scheme .docx/.txt.</li>
+<li><strong>An answer-key section</strong> inside the quiz, under a heading such as <em>Answer key</em>, <em>Answers</em>, <em>Mark scheme</em> or <em>Key</em>: pairs like <code>1. B</code>, <code>1-B</code>, <code>1) b</code>, or a table with a row of numbers above a row of letters.</li>
+<li><strong>A line under the question</strong>: <code>Answer: B</code>, <code>Ans: (b)</code>, <code>Correct answer: C</code> or <code>Key: D</code>.</li>
+<li><strong>A marked option</strong>: <code>*B) ...</code>, <code>B) ... *</code>, <code>B) ... (correct)</code>, <code>B) ... &#10003;</code> or <code>[x] B) ...</code>.</li>
+<li><strong>Formatting in Word</strong>: the one option that is bold, highlighted, underlined or coloured differently from the others.</li>
+</ol>
+<pre><code>3. Which law gives F = G m1 m2 / r^2?
+A. Hooke's law
+B. Newton's third law
+*C. Newton's law of gravitation
+D. Kepler's second law</code></pre>
+
+<h2>True / false and written answers</h2>
+<p>A question with the options <em>True</em> and <em>False</em>, or one that says &ldquo;true or false&rdquo; in the stem, becomes a true/false question. A question with no options becomes a written-answer (essay) question that you mark by hand. If your key has a model answer for it (<code>6. Period squared is proportional to ...</code>) it is attached for marking.</p>
+<pre><code>4. True or false: a satellite in circular orbit has constant speed.
+Answer: True
+
+5. Explain why astronauts seem weightless in orbit. (3 marks)</code></pre>
+
+<h2>Points and feedback</h2>
+<p>Write <code>(2 pt.)</code>, <code>[3 marks]</code> or <code>(1 point)</code> in a question to set its points (otherwise each question gets the default, 1). A line starting <code>Feedback:</code> or <code>Explanation:</code> under a question is shown to students after they answer.</p>
+
+<h2>Pictures and tables</h2>
+<p>A picture placed under a question is packed into the test and shown under that question. To share one picture or table between several questions, put a line above it such as <code>Use the diagram below to answer Questions 3&ndash;4.</code> Each figure is also saved as <code>Q03.png</code> and so on, in the <code>figures</code> folder of the download. Pictures in .emf or .wmf format often do not show in an LMS: paste them into Word as PNG.</p>
+
+<h2>Equations</h2>
+<p>Word equations, LaTeX in <code>\( ... \)</code> or <code>$ ... $</code>, and equation pictures with LaTeX alt text are turned into plain maths text that every LMS shows, for example <code>F = G m&#8321;m&#8322;/r&sup2;</code>, <code>v = &radic;(GM/r)</code> and <code>T&sup2; = 4&pi;&sup2;/(GM) a&sup3;</code>. Tick <em>Keep LaTeX as typed</em> if your LMS renders LaTeX itself.</p>
+
+<h2>Plain text and Markdown</h2>
+<p>.txt and .md files follow the same rules. In Markdown, <code>**bold**</code> and <code>==highlight==</code> count as formatting for the answer, and pipe tables are read as tables.</p>
+
+<h2>Check before you import</h2>
+<p>The results table shows every question, the answer found, <em>how</em> it was found, and any figure. Red rows have no answer. Skim it against your paper copy once; it takes a minute and catches almost everything.</p>
+<p><a class="btn" href="index.html">Convert a quiz</a></p>
+
+</main>
+<aside class="side" hidden aria-label="Advertisement"><div class="ad-slot ad-sidebar" data-slot="sidebar" hidden><span class="ad-label">Advertisement</span></div></aside>
+</div>
+<div class="ad-slot ad-footer" data-slot="footer" hidden><span class="ad-label">Advertisement</span></div>
+<footer class="site-footer"><div class="inner"><span>QuizToBBZip &middot; free, runs in your browser</span><a href="how-to.html">How to format a quiz</a><a href="import.html">Import steps</a><a href="privacy.html">Privacy</a><a href="about.html">About</a><a href="#" data-cookie-settings hidden>Cookie settings</a></div></footer>
+<script src="config.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
